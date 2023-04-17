@@ -1,272 +1,86 @@
-import { Home as HomeIcon, Search, Library, ChevronLeft, ChevronRight, Play, Shuffle, SkipBack, SkipForward, Repeat, Mic2, LayoutList, Laptop2Icon, Maximize2 } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { TiArrowSortedDown } from "react-icons/ti";
+import { userName } from "./config";
+import { MainSuggestionCard } from "@/components/MainSuggestionCard";
+import { Footer } from "@/components/Footer";
+import { SideBar } from "@/components/SideBar";
+import { MainMediaCard } from "@/components/MainMediaCard";
+import { AlbumSuggestions1, AlbumSuggestions2 } from "../../public/suggestions";
 import Image from "next/image";
-import { musicPlayingSinger, musicPlayingTitle, userName } from "./config";
-import { Volume1 } from "lucide-react";
+
+
+function greetUser() {
+  const now = new Date();
+  const currentHour = now.getHours();
+
+  let greeting;
+
+  if (currentHour < 12) {
+    greeting = "morning";
+  } else if (currentHour < 18) {
+    greeting = "afternoon";
+  } else {
+    greeting = "evening";
+  }
+
+  return greeting;
+}
+
 
 export default function Home() {
+  const greeting = greetUser();
+
   return (
     <div className="h-screen flex flex-col">
       <div className="flex flex-1">
-        <aside className="w-72 bg-zinc-950 p-6">
-          <div className="flex items-center gap-2">
-            <div className="w-3 h-3 bg-red-500 rounded-full hover:cursor-pointer" />
-            <div className="w-3 h-3 bg-yellow-500 rounded-full hover:cursor-pointer" />
-            <div className="w-3 h-3 bg-green-500 rounded-full hover:cursor-pointer" />
-          </div>
-
-          <nav className="space-y-5 mt-10">
-            <a
-              href=""
-              className="flex items-center gap-3 text-sm font-semibold text-zinc-200"
-            >
-              <HomeIcon /> Home
-            </a>
-            <a
-              href=""
-              className="flex items-center gap-3 text-sm font-semibold text-zinc-200"
-            >
-              <Search /> Search
-            </a>
-            <a
-              href=""
-              className="flex items-center gap-3 text-sm font-semibold text-zinc-200"
-            >
-              <Library /> Your Library
-            </a>
-          </nav>
-
-          <nav className="mt-6 pt-6 border-t border-zinc-800 flex flex-col gap-3">
-            <a href="" className="text-sm text-zinc-400 hover:text-zinc-100">
-              Top Brasil
-            </a>
-            <a href="" className="text-sm text-zinc-400 hover:text-zinc-100">
-              Hot Hits November
-            </a>
-            <a href="" className="text-sm text-zinc-400 hover:text-zinc-100">
-              Lo-Fi Hip Hop
-            </a>
-            <a href="" className="text-sm text-zinc-400 hover:text-zinc-100">
-              Fantasy World
-            </a>
-            <a href="" className="text-sm text-zinc-400 hover:text-zinc-100">
-              This is Queen
-            </a>
-          </nav>
-        </aside>
+        <SideBar />
 
         <main className="flex-1 p-6">
-          <div className="flex items-center gap-4">
-            <button className="p-1 rounded-full bg-black/40">
-              <ChevronLeft />
-            </button>
-            <button className="p-1 rounded-full bg-black/40">
-              <ChevronRight />
-            </button>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-4">
+              <button className="p-1 rounded-full bg-black/40">
+                <ChevronLeft />
+              </button>
+              <button className="p-1 rounded-full bg-black/40 cursor-not-allowed">
+                <ChevronRight color="#7B7B7B" />
+              </button>
+            </div>
+
+            <div className="flex items-center gap-2 rounded-full bg-black/40 p-1 pr-2 font-bold cursor-pointer">
+              <Image
+                src="https://github.com/wolney-fo.png"
+                width={28}
+                height={28}
+                alt="User Image"
+              />
+              {userName}
+              <TiArrowSortedDown size={18} />
+            </div>
           </div>
 
-          <h1 className="font-semibold text-3xl mt-10">Good Morning</h1>
+          <h1 className="font-semibold text-3xl mt-10">Good {greeting}</h1>
 
           <div className="grid grid-cols-3 gap-4 mt-4">
-            <a className="bg-white/5 group rounded-md flex items-center gap-4 overflow-hidden hover:bg-white/10 transition-colors hover:cursor-pointer">
-              <Image
-                src="/album.webp"
-                width={104}
-                height={104}
-                alt="Album Cover"
-              />
-              <strong>This is Queen</strong>
-
-              <button className="w-12 h-12 flex items-center justify-center pl-1 rounded-full bg-green-400 text-black ml-auto mr-8 invisible group-hover:visible">
-                <Play />
-              </button>
-            </a>
-            <a className="bg-white/5 group rounded-md flex items-center gap-4 overflow-hidden hover:bg-white/10 transition-colors hover:cursor-pointer">
-              <Image
-                src="/album.webp"
-                width={104}
-                height={104}
-                alt="Album Cover"
-              />
-              <strong>This is Queen</strong>
-
-              <button className="w-12 h-12 flex items-center justify-center pl-1 rounded-full bg-green-400 text-black ml-auto mr-8 invisible group-hover:visible">
-                <Play />
-              </button>
-            </a>
-            <a className="bg-white/5 group rounded-md flex items-center gap-4 overflow-hidden hover:bg-white/10 transition-colors hover:cursor-pointer">
-              <Image
-                src="/album.webp"
-                width={104}
-                height={104}
-                alt="Album Cover"
-              />
-              <strong>This is Queen</strong>
-
-              <button className="w-12 h-12 flex items-center justify-center pl-1 rounded-full bg-green-400 text-black ml-auto mr-8 invisible group-hover:visible">
-                <Play />
-              </button>
-            </a>
-            <a className="bg-white/5 group rounded-md flex items-center gap-4 overflow-hidden hover:bg-white/10 transition-colors hover:cursor-pointer">
-              <Image
-                src="/album.webp"
-                width={104}
-                height={104}
-                alt="Album Cover"
-              />
-              <strong>This is Queen</strong>
-
-              <button className="w-12 h-12 flex items-center justify-center pl-1 rounded-full bg-green-400 text-black ml-auto mr-8 invisible group-hover:visible">
-                <Play />
-              </button>
-            </a>
-            <a className="bg-white/5 group rounded-md flex items-center gap-4 overflow-hidden hover:bg-white/10 transition-colors hover:cursor-pointer">
-              <Image
-                src="/album.webp"
-                width={104}
-                height={104}
-                alt="Album Cover"
-              />
-              <strong>This is Queen</strong>
-
-              <button className="w-12 h-12 flex items-center justify-center pl-1 rounded-full bg-green-400 text-black ml-auto mr-8 invisible group-hover:visible">
-                <Play />
-              </button>
-            </a>
-            <a className="bg-white/5 group rounded-md flex items-center gap-4 overflow-hidden hover:bg-white/10 transition-colors hover:cursor-pointer">
-              <Image
-                src="/album.webp"
-                width={104}
-                height={104}
-                alt="Album Cover"
-              />
-              <strong>This is Queen</strong>
-
-              <button className="w-12 h-12 flex items-center justify-center pl-1 rounded-full bg-green-400 text-black ml-auto mr-8 invisible group-hover:visible">
-                <Play />
-              </button>
-            </a>
+            {AlbumSuggestions1.map((album) => (
+              <MainSuggestionCard key={album.title} album={album} />
+            ))}
           </div>
 
-          <h2 className="font-semibold text-2xl mt-10">Made for {userName}</h2>
+          <div className="flex items-center justify-between mt-10">
+            <h2 className="font-semibold text-2xl cursor-pointer hover:underline">
+              Made for {userName}
+            </h2>
+            <span className="text-[#B3B3B3] text-sm cursor-pointer hover:underline">See all</span>
+          </div>
 
           <div className="grid grid-cols-8 gap-4 mt-4">
-            <a className="bg-white/5 p-2 rounded-md flex flex-col gap-2 hover:bg-white/10 transition-colors">
-              <Image
-                className="w-full"
-                src="/album.webp"
-                width={120}
-                height={120}
-                alt="Album Cover"
-              />
-              <strong className="font-semibold">This is Fred Mercury</strong>
-              <span className="text-sm text-zinc- 400">Queen, Alan Walker</span>
-            </a>
-            <a className="bg-white/5 p-2 rounded-md flex flex-col gap-2 hover:bg-white/10 transition-colors">
-              <Image
-                className="w-full"
-                src="/album.webp"
-                width={120}
-                height={120}
-                alt="Album Cover"
-              />
-              <strong className="font-semibold">This is Fred Mercury</strong>
-              <span className="text-sm text-zinc- 400">Queen, Alan Walker</span>
-            </a>
-            <a className="bg-white/5 p-2 rounded-md flex flex-col gap-2 hover:bg-white/10 transition-colors">
-              <Image
-                className="w-full"
-                src="/album.webp"
-                width={120}
-                height={120}
-                alt="Album Cover"
-              />
-              <strong className="font-semibold">This is Fred Mercury</strong>
-              <span className="text-sm text-zinc- 400">Queen, Alan Walker</span>
-            </a>
-            <a className="bg-white/5 p-2 rounded-md flex flex-col gap-2 hover:bg-white/10 transition-colors">
-              <Image
-                className="w-full"
-                src="/album.webp"
-                width={120}
-                height={120}
-                alt="Album Cover"
-              />
-              <strong className="font-semibold">This is Fred Mercury</strong>
-              <span className="text-sm text-zinc- 400">Queen, Alan Walker</span>
-            </a>
-            <a className="bg-white/5 p-2 rounded-md flex flex-col gap-2 hover:bg-white/10 transition-colors">
-              <Image
-                className="w-full"
-                src="/album.webp"
-                width={120}
-                height={120}
-                alt="Album Cover"
-              />
-              <strong className="font-semibold">This is Fred Mercury</strong>
-              <span className="text-sm text-zinc- 400">Queen, Alan Walker</span>
-            </a>
-            <a className="bg-white/5 p-2 rounded-md flex flex-col gap-2 hover:bg-white/10 transition-colors">
-              <Image
-                className="w-full"
-                src="/album.webp"
-                width={120}
-                height={120}
-                alt="Album Cover"
-              />
-              <strong className="font-semibold">This is Fred Mercury</strong>
-              <span className="text-sm text-zinc- 400">Queen, Alan Walker</span>
-            </a>
+            {AlbumSuggestions2.map((album2) => (
+              <MainMediaCard key={album2.title} album={album2} />
+            ))}
           </div>
         </main>
       </div>
-      <footer className="bg-zinc-800 border-t border-zinc-700 px-6 py-4 flex items-center justify-between">
-        {/*Music Playing*/}
-        <div className="flex items-center gap-3">
-          <Image src="/album.webp" width={56} height={56} alt="Album Cover" />
-          <div className="flex flex-col">
-            <strong className="font-normal hover:underline hover:cursor-pointer">
-              {musicPlayingTitle}
-            </strong>
-            <span className="text-xs text-zinc-400 hover:underline hover:cursor-pointer">
-              {musicPlayingSinger}
-            </span>
-          </div>
-        </div>
-        {/*Music Controller*/}
-        <div className="flex flex-col items-center gap-2">
-          <div className="flex items-center gap-6">
-            <Shuffle size={20} className="text-zinc-200" />
-            <SkipBack size={20} className="text-zinc-200" />
-
-            <button className="w-10 h-10 flex items-center justify-center pl-1 rounded-full bg-white text-black">
-              <Play />
-            </button>
-
-            <SkipForward size={20} className="text-zinc-200" />
-            <Repeat size={20} className="text-zinc-200" />
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-zinc-400">1:06</span>
-            <div className="h-1 rounded-full w-96 bg-zinc-600">
-              <div className="bg-zinc-200 w-40 h-1 rounded-full"></div>
-            </div>
-            <span className="text-xs text-zinc-400">3:37</span>
-          </div>
-        </div>
-        {/*Actions*/}
-        <div className="flex items-center gap-4">
-          <Mic2 size={20} />
-          <LayoutList size={20} />
-          <Laptop2Icon size={20} />
-          <div className="flex items-center gap-2">
-            <Volume1 size={20} />
-            <div className="h-1 rounded-full w-24 bg-zinc-600">
-              <div className="bg-zinc-200 w-10 h-1 rounded-full"></div>
-            </div>
-          </div>
-          <Maximize2 size={20} />
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }
