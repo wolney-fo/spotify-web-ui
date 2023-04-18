@@ -1,7 +1,6 @@
+"use client"
+import * as Slider from "@radix-ui/react-slider";
 import {
-  Shuffle,
-  SkipBack,
-  SkipForward,
   Repeat,
   Mic2,
   LayoutList,
@@ -76,9 +75,18 @@ export function Footer() {
         <Laptop2Icon size={20} />
         <div className="flex items-center gap-2">
           <Volume1 size={20} />
-          <div className="h-1 rounded-full w-24 bg-zinc-600">
-            <div className="bg-zinc-200 w-10 h-1 rounded-full"></div>
-          </div>
+          <Slider.Root
+            className="SliderRoot group relative flex items-center select-none touch-none w-24 h-1 "
+            defaultValue={[50]}
+            max={100}
+            step={1}
+            aria-label="Volume"
+          >
+            <Slider.Track className="SliderTrack bg-zinc-600 relative grow rounded-full h-1">
+              <Slider.Range className="SliderRange absolute bg-white rounded-full h-full group-hover:bg-[#1DB954]" />
+            </Slider.Track>
+            <Slider.Thumb className="SliderThumb block w-3 h-3 bg-white rounded-full invisible group-hover:visible focus:outline-none" />
+          </Slider.Root>
         </div>
         <Maximize2 size={20} />
       </div>
