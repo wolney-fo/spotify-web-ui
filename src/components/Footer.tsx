@@ -18,8 +18,26 @@ import {
 } from "react-icons/io5";
 import Image from "next/image";
 import { musicPlayingSinger, musicPlayingThumbnailUrl, musicPlayingTitle } from "../app/config";
+import { useState } from "react";
 
 export function Footer() {
+
+  const [progressbar, setProgressbar] = useState<number[]>([41]);
+  const [currentTime, setCurrentTime] = useState<string>("1:20");
+
+  const handleSliderChange = (value: number[]) => {
+    setProgressbar(value);
+    const currentTimeInSeconds = parseInt((value[0] / 100) * 197 + "", 10);
+    setCurrentTime(formatTime(currentTimeInSeconds));
+  };
+
+  function formatTime(seconds: number): string {
+    const minutes = Math.floor(seconds / 60)
+      .toString();
+    const remainingSeconds = (seconds % 60).toString().padStart(2, "0");
+    return `${minutes}:${remainingSeconds}`;
+  }
+
   return (
     <footer className="bg-[#181818] border-t border-zinc-700 px-6 py-4 flex items-center justify-between">
       {/*Music Playing*/}
@@ -61,10 +79,20 @@ export function Footer() {
           <Repeat size={20} className="text-[#1DB954]" />
         </div>
         <div className="flex items-center gap-2">
-          <span className="text-xs text-zinc-400">1:20</span>
-          <div className="h-1 rounded-full w-96 bg-zinc-600">
-            <div className="bg-zinc-200 w-40 h-1 rounded-full"></div>
-          </div>
+          <span className="text-xs text-zinc-400">{currentTime}</span>
+          <Slider.Root
+            className="SliderRoot group relative flex items-center select-none touch-none w-96 h-1"
+            value={progressbar}
+            onValueChange={handleSliderChange}
+            max={100}
+            step={1}
+            aria-label="Volume"
+          >
+            <Slider.Track className="SliderTrack bg-zinc-600 relative grow rounded-full h-1">
+              <Slider.Range className="SliderRange absolute bg-white rounded-full h-full group-hover:bg-[#1DB954]" />
+            </Slider.Track>
+            <Slider.Thumb className="SliderThumb block w-3 h-3 bg-white rounded-full invisible group-hover:visible focus:outline-none" />
+          </Slider.Root>
           <span className="text-xs text-zinc-400">3:17</span>
         </div>
       </div>
